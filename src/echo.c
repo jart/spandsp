@@ -429,7 +429,7 @@ sample_no++;
 
     /* And the answer is..... */
     clean_rx = rx - echo_value;
-printf("echo is %" PRId32 "\n", echo_value);
+/* printf("echo is %" PRId32 "\n", echo_value); */
     /* That was the easy part. Now we need to adapt! */
     if (ec->nonupdate_dwell > 0)
         ec->nonupdate_dwell--;
@@ -466,7 +466,7 @@ printf("echo is %" PRId32 "\n", echo_value);
                 {
                     ec->narrowband_count = 0;
                     score = narrowband_detect(ec);
-printf("Do the narrowband test %d at %d\n", score, ec->curr_pos);
+/* printf("Do the narrowband test %d at %d\n", score, ec->curr_pos); */
                     if (score > 6)
                     {
                         if (ec->narrowband_score == 0)
@@ -477,7 +477,7 @@ printf("Do the narrowband test %d at %d\n", score, ec->curr_pos);
                     {
                         if (ec->narrowband_score > 200)
                         {
-printf("Revert to %d at %d\n", (ec->tap_set + 1)%3, sample_no);
+/* printf("Revert to %d at %d\n", (ec->tap_set + 1)%3, sample_no); */
                             memcpy(ec->fir_taps16[ec->tap_set], ec->fir_taps16[3], ec->taps*sizeof(int16_t));
                             memcpy(ec->fir_taps16[(ec->tap_set - 1)%3], ec->fir_taps16[3], ec->taps*sizeof(int16_t));
                             for (i = 0;  i < ec->taps;  i++)
@@ -490,7 +490,7 @@ printf("Revert to %d at %d\n", (ec->tap_set + 1)%3, sample_no);
                 ec->dtd_onset = FALSE;
                 if (--ec->tap_rotate_counter <= 0)
                 {
-printf("Rotate to %d at %d\n", ec->tap_set, sample_no);
+/* printf("Rotate to %d at %d\n", ec->tap_set, sample_no); */
                     ec->tap_rotate_counter = 1600;
                     ec->tap_set++;
                     if (ec->tap_set > 2)
@@ -528,7 +528,7 @@ printf("Rotate to %d at %d\n", ec->tap_set, sample_no);
         {
             if (!ec->dtd_onset)
             {
-printf("Revert to %d at %d\n", (ec->tap_set + 1)%3, sample_no);
+/* printf("Revert to %d at %d\n", (ec->tap_set + 1)%3, sample_no); */
                 memcpy(ec->fir_taps16[ec->tap_set], ec->fir_taps16[(ec->tap_set + 1)%3], ec->taps*sizeof(int16_t));
                 memcpy(ec->fir_taps16[(ec->tap_set - 1)%3], ec->fir_taps16[(ec->tap_set + 1)%3], ec->taps*sizeof(int16_t));
                 for (i = 0;  i < ec->taps;  i++)
@@ -604,7 +604,7 @@ printf("Revert to %d at %d\n", (ec->tap_set + 1)%3, sample_no);
         ec->cng = FALSE;
     }
 
-printf("Narrowband score %4d %5d at %d\n", ec->narrowband_score, score, sample_no);
+/* printf("Narrowband score %4d %5d at %d\n", ec->narrowband_score, score, sample_no); */
     /* Roll around the rolling buffer */
     if (ec->curr_pos <= 0)
         ec->curr_pos = ec->taps;
